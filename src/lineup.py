@@ -1,4 +1,3 @@
-import urllib2
 from pprint import pprint
 from bs4 import BeautifulSoup
 import configs
@@ -14,21 +13,22 @@ def getSoup(website):
 
 def getPlayerStats(player):
     playerDict = {}
-    website = configs.NJABL_PLAYER_PAGE.format(playerId=player[configs.PLAYER_ID])
+    website = configs.NJABL_PLAYER_PAGE.format(playerId=player.pageId)
     soup = getSoup(website)
-    playerStatRows = soup.tbody.find_all('tr')
+    # TODO: use driver to click buttons on website to see other tabs
+    playerStatRows = soup.find_all('tr')
     for i, _ in enumerate(playerStatRows):
-        if player[configs.NAME] == playerStatRows[i].text.split('\n')[3]:
+        if player.name == playerStatRows[i].text.split('\n')[3]:
             playerStats = playerStatRows[i].text.split('\n')[5:26]
             break
-    playerDict[player[configs.NAME]] = {}
+    playerDict[player.name] = {}
     for i, _ in enumerate(playerStats):
-        playerDict[player[configs.NAME]][configs.STAT_CATEGORIES[i]] = float(playerStats[i])
+        playerDict[player.name][configs.STAT_CATEGORIES[i]] = float(playerStats[i])
     pprint(playerDict)
 
 
 def main():
-    getPlayerStats(configs.BLOSS)
+    getPlayerStats(configs.bloss)
     # getPlayerStats(configs.ANDREW)
 
 

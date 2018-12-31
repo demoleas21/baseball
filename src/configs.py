@@ -1,3 +1,5 @@
+from models import Player
+
 GP = 'Games Played'
 AB = 'At Bats'
 R = 'Runs'
@@ -22,20 +24,11 @@ PA = 'Plate Appearances'
 
 STAT_CATEGORIES = [GP, AB, R, H, B1, B2, B3, HR, TB, BB, RBI, HBP, K, SB, AVG, OBP, SLG, OPS, SF, SAC, PA]
 
-NJABL_FALL_2018 = 'https://www.newjerseyabl.com/stats/team_instance/3824651?subseason=536707&tab=team_instance_player_stats&tool=3261383'
 NJABL_PLAYER_PAGE = 'https://www.newjerseyabl.com/roster_players/{playerId}'
 
-NAME = 'name'
-PLAYER_ID = 'playerId'
+andrew = Player('Andrew Demoleas', '26469546')
+bloss = Player('Ryan Godfrey', '26469533')
 
-ANDREW = {
-    NAME: 'Andrew Demoleas',
-    PLAYER_ID: '26469546'
-}
-BLOSS = {
-    NAME: 'Ryan Godfrey',
-    PLAYER_ID: '26469533'
-}
 DRE = {
 
 }
