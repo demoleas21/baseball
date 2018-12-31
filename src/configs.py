@@ -25,13 +25,16 @@ STAT_CATEGORIES = [GP, AB, R, H, B1, B2, B3, HR, TB, BB, RBI, HBP, K, SB, AVG, O
 NJABL_FALL_2018 = 'https://www.newjerseyabl.com/stats/team_instance/3824651?subseason=536707&tab=team_instance_player_stats&tool=3261383'
 NJABL_PLAYER_PAGE = 'https://www.newjerseyabl.com/roster_players/{playerId}'
 
+NAME = 'name'
+PLAYER_ID = 'playerId'
+
 ANDREW = {
-    'name': 'Andrew Demoleas',
-    'pageId': '26469546'
+    NAME: 'Andrew Demoleas',
+    PLAYER_ID: '26469546'
 }
 BLOSS = {
-    'name': 'Ryan Godfrey',
-    'pageId': '26469533'
+    NAME: 'Ryan Godfrey',
+    PLAYER_ID: '26469533'
 }
 DRE = {
 
