@@ -18,10 +18,9 @@ def getSoup(website):
 
 def setStats(player, stat, statName):
     playerDict = {}
-    playerDict[player.name] = {}
     for i, _ in enumerate(stat):
-        playerDict[player.name][configs.STAT_CATEGORIES[i]] = float(stat[i])
-    player.setStats(statName, playerDict[player.name])
+        playerDict[configs.STATS_LIST[i]] = float(stat[i])
+    player.setStats(statName, playerDict)
 
 
 def getStats(soup, categories):
@@ -38,18 +37,18 @@ def getStats(soup, categories):
 
 
 def setPlayerStats(player):
-    website = configs.NJABL_PLAYER_PAGE.format(playerId=player.pageId)
+    website = configs.NJABL_PLAYER_PAGE.format(pageId=player.pageId)
     soup = getSoup(website)
-    categories = ['regularSeasonFall2018', 'regularSeasonSpring2018', 'careerTotals']
-    stats = getStats(soup, categories)
-    for category in categories:
+    stats = getStats(soup, configs.STAT_CATEGORIES)
+    for category in configs.STAT_CATEGORIES:
         setStats(player, stats[category], category)
     pprint(player.regularSeasonFall2018)
 
 
 def main():
     # setPlayerStats(configs.bloss)
-    setPlayerStats(configs.andrew)
-
+    # setPlayerStats(configs.andrew)
+    for player in configs.PLAYERS:
+        setPlayerStats(player)
 
 main()
