@@ -11,7 +11,7 @@ def getSoup(website):
     # TODO: use driver to click buttons on website to see other tabs
     careerStatsButton = driver.find_element_by_link_text('Career Stats')
     careerStatsButton.click()
-    sleep(2)
+    sleep(1)
     html = driver.page_source
     return BeautifulSoup(html, "html.parser")
 
@@ -24,18 +24,32 @@ def setStats(player, stat, statName):
     player.setStats(statName, playerDict[player.name])
 
 
-def getPlayerStats(player):
+def getStats(soup, categories):
+    stats = {}
+    for category in categories:
+        tds = configs.TD_STAT_MAP[category]
+        tableRows = soup.find_all('tr')
+        for row in tableRows:
+            if tds['statText'] in row.text:
+                stat = row.text.split('\n')[tds['start']:tds['end']]
+                stats[category] = stat
+                break
+    return stats
+
+
+def setPlayerStats(player):
     website = configs.NJABL_PLAYER_PAGE.format(playerId=player.pageId)
     soup = getSoup(website)
-    setStats(player, soup.find_all('tr')[8].text.split('\n')[3:24], 'regularSeasonFall2018')
-    setStats(player, soup.find_all('tr')[9].text.split('\n')[3:24], 'regularSeasonSpring2018')
-    setStats(player, soup.find_all('tr')[10].text.split('\n')[2:23], 'careerTotals')
+    categories = ['regularSeasonFall2018', 'regularSeasonSpring2018', 'careerTotals']
+    stats = getStats(soup, categories)
+    for category in categories:
+        setStats(player, stats[category], category)
     pprint(player.regularSeasonFall2018)
 
 
 def main():
-    # getPlayerStats(configs.bloss)
-    getPlayerStats(configs.andrew)
+    # setPlayerStats(configs.bloss)
+    setPlayerStats(configs.andrew)
 
 
 main()

@@ -26,6 +26,12 @@ STAT_CATEGORIES = [GP, AB, R, H, B1, B2, B3, HR, TB, BB, RBI, HBP, K, SB, AVG, O
 
 NJABL_PLAYER_PAGE = 'https://www.newjerseyabl.com/roster_players/{playerId}'
 
+TD_STAT_MAP = {
+    'regularSeasonFall2018': {'statText': '2018 Fall\nRegular Season', 'start': 3, 'end': 24},
+    'regularSeasonSpring2018': {'statText': '2018 Spring\nRegular Season', 'start': 3, 'end': 24},
+    'careerTotals': {'statText': 'Career Totals', 'start': 2, 'end': 23},
+}
+
 andrew = Player('Andrew Demoleas', '26469546')
 bloss = Player('Ryan Godfrey', '26469533')
 
