@@ -35,15 +35,14 @@ STAT_CATEGORIES = {
 
 andrew = Player('Andrew Demoleas', '26469546')
 bloss = Player('Ryan Godfrey', '26469533')
+dre = Player('Andres Martinez', '26469547')
 
 PLAYERS = [
     andrew,
     bloss,
+    dre,
 ]
 
-DRE = {
-
-}
 BEN = {
 
 }

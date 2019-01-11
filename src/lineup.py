@@ -6,11 +6,15 @@ from time import sleep
 
 
 def getSoup(website):
+    # TODO: Reorganize and abstract away button clicks
     driver = webdriver.Chrome()
     driver.get(website)
-    # TODO: use driver to click buttons on website to see other tabs
     careerStatsButton = driver.find_element_by_link_text('Career Stats')
     careerStatsButton.click()
+    sleep(1)
+    batterButton = driver.find_element_by_link_text('Batter')
+    if batterButton:  # TODO: this will crash if not found
+        batterButton.click()
     gameLogButton = driver.find_element_by_link_text('Game Log')
     gameLogButton.click()
     sleep(1)
@@ -29,12 +33,13 @@ def setStats(player, stat, statName):
 
 def getStats(soup, categories):
     stats = {}
+    tableRows = soup.find_all('tr')
     for category in categories:
         tds = configs.STAT_CATEGORIES[category]
-        tableRows = soup.find_all('tr')
         for row in tableRows:
-            if tds['statText'] in row.text:
-                stat = row.text.split('\n')[tds['start']:tds['end']]
+            stat = row.text.split('\n')[tds['start']:tds['end']]
+            if tds['statText'] in row.text and len(stat) > 10:
+                # TODO record meta data for games
                 stats[category] = stat
                 break
     return stats
@@ -51,8 +56,9 @@ def setPlayerStats(player):
 
 def main():
     # setPlayerStats(configs.bloss)
+    setPlayerStats(configs.dre)
     # setPlayerStats(configs.andrew)
-    for player in configs.PLAYERS:
-        setPlayerStats(player)
+    # for player in configs.PLAYERS:
+    #     setPlayerStats(player)
 
 main()
